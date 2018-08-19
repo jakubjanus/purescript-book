@@ -2,7 +2,8 @@ module Test.Main where
 
 import Prelude
 
-import Data.AddressBook (AddressBook, Entry, emptyBook, findEntry, findEntryByStret, insertEntry, showEntry, testLastName)
+import Data.AddressBook (AddressBook, Entry, emptyBook, findEntry, findEntryByStret, insertEntry, removeDup, showEntry, testLastName)
+import Data.List (length)
 import Data.Maybe (Maybe)
 import Effect (Effect)
 import Effect.Console (log)
@@ -13,6 +14,16 @@ example =
   , lastName: "Smith"
   , address: { street: "123 Fake St."
              , city: "Faketown"
+             , state: "CA"
+             }
+  }
+
+example2 :: Entry
+example2 =
+  { firstName: "John"
+  , lastName: "Smith"
+  , address: { street: "999 Fake St."
+             , city: "Newe York"
              , state: "CA"
              }
   }
@@ -37,3 +48,11 @@ main = do
 
   log $ show $ testLastName "Smith" book1
   log $ show $ testLastName "James" book1
+
+  let book2 = insertEntry example2 book1
+  let withoutDups = removeDup book2
+
+  log "Duplicates:"
+
+  log $ show $ length book2
+  log $ show $ length withoutDups
