@@ -2,7 +2,7 @@ module Test.Main where
 
 import Prelude
 
-import Data.AddressBook (AddressBook, Entry, emptyBook, findEntry, findEntryByStret, insertEntry, showEntry)
+import Data.AddressBook (AddressBook, Entry, emptyBook, findEntry, findEntryByStret, insertEntry, showEntry, testLastName)
 import Data.Maybe (Maybe)
 import Effect (Effect)
 import Effect.Console (log)
@@ -34,3 +34,6 @@ main = do
   let entry = findEntryByStret "123 Fake St." book1
 
   log $ show $ printEntry entry
+
+  log $ show $ testLastName "Smith" book1
+  log $ show $ testLastName "James" book1
