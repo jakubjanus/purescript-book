@@ -2,8 +2,9 @@ module Test.Main where
 
 import Prelude
 
-import Control.Monad.Eff (Eff)
-import Control.Monad.Eff.Console (CONSOLE, logShow)
+import Effect (Effect)
+import Effect.Console (log)
+
 import Data.AddressBook (AddressBook, Entry, emptyBook, insertEntry, findEntry, showEntry)
 import Data.Maybe (Maybe)
 
@@ -23,9 +24,12 @@ book0 = emptyBook
 printEntry :: String -> String -> AddressBook -> Maybe String
 printEntry firstName lastName book = showEntry <$> findEntry firstName lastName book
 
-main :: Eff (console :: CONSOLE) Unit
+iden :: String -> String
+iden s = s
+
+main :: Effect Unit
 main = do
   let book1 = insertEntry example emptyBook
 
-  logShow $ printEntry "John" "Smith" book0
-  logShow $ printEntry "John" "Smith" book1
+  log $ show $ printEntry "John" "Smith" book0
+  log $ show $ printEntry "John" "Smith" book1
